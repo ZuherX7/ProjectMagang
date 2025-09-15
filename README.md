@@ -1,60 +1,179 @@
-# CodeIgniter 4 Framework
+# SIDODIK - Sistem Informasi Dokumen Diskominfotik
 
-## What is CodeIgniter?
+Sistem manajemen dokumen digital untuk Dinas Komunikasi dan Informatika (Diskominfotik) Kabupaten Bandung Barat.
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+## 📋 Deskripsi
 
-This repository holds the distributable version of the framework.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+SIDODIK adalah aplikasi web berbasis CodeIgniter 4 yang dirancang untuk mengelola dokumen digital instansi pemerintah. Aplikasi ini menyediakan fitur manajemen dokumen yang aman, terstruktur, dan mudah digunakan untuk admin dan user.
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+## ✨ Fitur Utama
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+### 👨‍💼 Admin
+- **Dashboard Admin**: Overview statistik dan dokumen terbaru
+- **Kelola Dokumen**: Upload, edit, hapus, dan kategorisasi dokumen
+- **Kelola Menu**: Manajemen menu navigasi dokumen
+- **Kelola Kategori**: Organisasi dokumen berdasarkan kategori
+- **Kelola User**: Manajemen akun pengguna
+- **Login Admin**: Autentikasi dengan username/password
 
-## Important Change with index.php
+### 👤 User
+- **Dashboard User**: Interface ramah pengguna dengan pencarian
+- **Browse Dokumen**: Akses dokumen berdasarkan menu dan kategori
+- **Search Function**: Pencarian dokumen yang powerful
+- **View & Download**: Lihat dan unduh dokumen
+- **Login User**: Autentikasi dengan NIP
+- **Reset Password**: Fitur lupa password untuk user
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+## 🛠 Teknologi
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+- **Backend**: CodeIgniter 4
+- **Database**: MySQL/MariaDB
+- **Frontend**: HTML5, CSS3, JavaScript
+- **UI Framework**: Bootstrap 5
+- **Icons**: Font Awesome 6
+- **File Support**: PDF, DOC, DOCX, XLS, XLSX, PPT, PPTX
 
-**Please** read the user guide for a better explanation of how CI4 works!
+## 📁 Struktur Database
 
-## Repository Management
+### Tabel Utama:
+- `users` - Data pengguna (admin/user)
+- `menu` - Menu navigasi dokumen
+- `kategori` - Kategori dokumen per menu
+- `dokumen` - Data dokumen dan file
+- `log_activity` - Log aktivitas user
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+## 🚀 Instalasi
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+### Prerequisites
+- PHP 8.0+ dengan ekstensi: intl, curl, mbstring, gd
+- MySQL/MariaDB 10.4+
+- Web Server (Apache/Nginx)
+- Composer
 
-## Contributing
+### Langkah Instalasi
 
-We welcome contributions from the community.
+1. **Clone Repository**
+   ```bash
+   git clone [URL_REPOSITORY]
+   cd sidodik
+   ```
 
-Please read the [*Contributing to CodeIgniter*](https://github.com/codeigniter4/CodeIgniter4/blob/develop/CONTRIBUTING.md) section in the development repository.
+2. **Install Dependencies**
+   ```bash
+   composer install
+   ```
 
-## Server Requirements
+3. **Konfigurasi Environment**
+   ```bash
+   cp env .env
+   ```
+   
+   Edit file `.env`:
+   ```ini
+   # Database
+   database.default.hostname = localhost
+   database.default.database = sidodik
+   database.default.username = your_username
+   database.default.password = your_password
+   database.default.DBDriver = MySQLi
+   database.default.DBPrefix = 
+   database.default.port = 3306
+   
+   # Base URL
+   app.baseURL = 'http://localhost/sidodik/'
+   
+   # Environment
+   CI_ENVIRONMENT = development
+   ```
 
-PHP version 8.1 or higher is required, with the following extensions installed:
+4. **Import Database**
+   ```bash
+   mysql -u username -p sidodik < sidodik30_DONE.sql
+   ```
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+5. **Set Permissions**
+   ```bash
+   chmod -R 755 writable/
+   chmod -R 755 public/uploads/
+   ```
 
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - If you are still using PHP 7.4 or 8.0, you should upgrade immediately.
-> - The end of life date for PHP 8.1 will be December 31, 2025.
+6. **Akses Aplikasi**
+   - URL: `http://localhost/sidodik/`
+   - Admin Login: `admin` / `password`
+   - User Login: Gunakan NIP yang tersedia di database
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+## 📂 Struktur Folder
 
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+```
+sidodik/
+├── app/
+│   ├── Controllers/     # Logic aplikasi
+│   ├── Models/         # Model database
+│   ├── Views/          # Template halaman
+│   └── ...
+├── public/
+│   ├── assets/         # CSS, JS, Images
+│   ├── uploads/        # File dokumen upload
+│   └── index.php
+├── writable/           # Cache, logs, session
+├── .env               # Konfigurasi environment
+└── README.md
+```
+
+## 🔐 Default Accounts
+
+### Admin
+- **Username**: `admin`
+- **Password**: `password`
+- **Role**: Administrator
+
+### User Contoh
+- **NIP**: `198501012010032001`
+- **Password**: `password`
+- **Role**: User
+
+### Dashboard Admin
+![Dashboard Admin](assets/img/gedung2.png)
+*Background image dengan overlay transparan untuk UI yang elegan*
+
+### Fitur Utama Admin:
+- Statistics cards dengan data real-time
+- Quick actions untuk manajemen cepat
+- Recent documents dengan file type icons
+- Background image dengan blur effect
+
+### Dashboard User
+- Hero section dengan search functionality
+- Menu cards dengan icon dan counter dokumen
+- Recent documents grid
+- Responsive design untuk mobile
+
+## 📋 Panduan Penggunaan
+
+### Admin
+1. Login dengan akun admin
+2. Kelola menu dan kategori terlebih dahulu
+3. Upload dokumen sesuai menu/kategori
+4. Kelola user dan monitor aktivitas
+
+### User
+1. Login dengan NIP
+2. Browse dokumen melalui menu atau search
+3. View dokumen di browser atau download
+4. Reset password jika lupa melalui form khusus
+
+## 🔧 Konfigurasi
+
+### File Upload
+- **Max Size**: 10MB per file
+- **Allowed Types**: PDF, DOC, DOCX, XLS, XLSX, PPT, PPTX
+- **Storage**: `public/uploads/documents/YYYY/MM/`
+
+### Security
+- CSRF Protection aktif
+- Input validation dan sanitization
+- File type validation
+- SQL injection protection via CodeIgniter Query Builder
+
+## 📄 License
+Project ini dikembangkan sebagai bagian dari program magang akademik semester 7 di Diskominfotik Kabupaten Bandung Barat. Pengembangan lebih lanjut oleh instansi terkait.
